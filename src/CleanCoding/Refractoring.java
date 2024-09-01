@@ -6,33 +6,29 @@ import java.util.Scanner;
 
 public class Refractoring {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        final byte MONTHS_IN_YEAR = 12;
-        final byte PERCENT = 100;
 
-        int principal = - 1;
-        float monthly_interest = -1;
-        int period = 0;
-        while (principal < 1000 || principal > 1_000_000){
-            System.out.print("Principal (1K - 1M): ");
-            principal = scanner.nextInt();
-        }
-        while(monthly_interest < 0 || monthly_interest > 30){
-            System.out.print("Annual Interest Rate: ");
-            monthly_interest = scanner.nextFloat();
-
-            if (monthly_interest < 0 || monthly_interest > 30){
-                System.out.println("Enter a value between 0 and 30");
-            }else{
-                System.out.print("Period (Years): ");
-                period = scanner.nextInt();
-            }
-        }
+        int principal = (int) readNumber("Principal: ", 1000, 1_000_000);
+        float monthly_interest = (float) readNumber("Annual Interest rate: ", 0, 30);
+        byte period = (byte) readNumber("Period (Years): ", 1, 30);
 
         double result = calculateMortgage(principal, monthly_interest, period);
 
         NumberFormat currency = NumberFormat.getCurrencyInstance();
         System.out.println(currency.format(result));
+    }
+
+    public static double readNumber(String prompt, double min, double max){
+        Scanner scanner = new Scanner(System.in);
+        double value;
+        while (true){
+            System.out.print(prompt);
+            value = scanner.nextFloat();
+            if (value >= min && value <= max){
+                break;
+            }
+            System.out.println("Enter a value between " + min + "and " + max);
+        }
+        return value;
     }
 
     public static double calculateMortgage(
