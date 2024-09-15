@@ -1,4 +1,4 @@
-package com.codewithmosh;
+package Part3;
 
 public class Main {
 

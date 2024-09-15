@@ -1,4 +1,6 @@
-package com.codewithmosh;
+package Part3;
+
+import Part3.MortgageCalculator;
 
 import java.text.NumberFormat;
 
